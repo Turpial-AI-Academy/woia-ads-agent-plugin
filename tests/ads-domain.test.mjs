@@ -4,11 +4,11 @@ import {coordinate} from '../skills/woia-ads/scripts/coordinate.mjs';
 import {readFileSync} from 'node:fs';
 import Ajv from 'ajv';
 const b={name:'woia-core',version:'0.5.3',qualified:true,commit:'a'.repeat(40),tree:'b'.repeat(40)};
-const r={department:'ads',action:'ads.budget.set',account:'account',resource:'campaign',destination:'landing',currency:'USD',source_version:'v1',idempotency_key:'op1',source_current:true,asset_accepted:true,provider_qualified:true,previous_result:'NONE',amount_minor:100};
-const p={accepted:true,authority_ref:'accepted-policy',actions:['ads.budget.set'],account:'account',resource:'campaign',destination:'landing',currency:'USD',remaining_minor:100};
+const r={organization:'org1',actor:'staff1',purpose:'approved-acquisition',payload_digest:'a'.repeat(64),department:'ads',action:'ads.budget.set',account:'account',resource:'campaign',destination:'landing',currency:'USD',source_version:'v1',idempotency_key:'op1',source_current:true,asset_accepted:true,provider_qualified:true,previous_result:'NONE',amount_minor:100};
+const p={organization:'org1',actor:'staff1',purpose:'approved-acquisition',payload_digest:'a'.repeat(64),source_version:'v1',current:true,revoked:false,accepted:true,authority_ref:'accepted-policy',actions:['ads.budget.set'],account:'account',resource:'campaign',destination:'landing',currency:'USD',remaining_minor:100};
 test('bounded proposal has no execution',()=>assert.deepEqual(coordinate(r,p,b),{result:'DISPATCH_PROPOSAL',provider:'woia-ads-platforms',action:'ads.budget.set',idempotency_key:'op1',effect_executed:false}));
 for(const key of ['account','resource','destination','currency','source_version','idempotency_key'])test('missing '+key+' blocks',()=>assert.equal(coordinate({...r,[key]:''},p,b).result,'BLOCKED'));
-for(const key of ['account','resource','destination','currency'])test('authority mismatch '+key,()=>assert.equal(coordinate({...r,[key]:'other'},p,b).result,'BLOCKED'));
+for(const key of ['account','resource','destination','currency','organization','actor','purpose','source_version','payload_digest'])test('authority mismatch '+key,()=>assert.equal(coordinate({...r,[key]:'other'},p,b).result,'BLOCKED'));
 for(const key of ['source_current','asset_accepted','provider_qualified'])test('unqualified '+key,()=>assert.equal(coordinate({...r,[key]:false},p,b).result,'BLOCKED'));
 for(const action of ['communication.external.send','appointment.create','finance.journal.post','payment.execute','sale.negotiate','marketing.public.execute'])test('reject '+action,()=>assert.equal(coordinate({...r,action},p,b).result,'BLOCKED'));
 for(const previous_result of ['SUCCEEDED','PENDING','FAILED',undefined])test('no duplicate '+previous_result,()=>assert.equal(coordinate({...r,previous_result},p,b).result,'BLOCKED'));
@@ -23,3 +23,6 @@ test('person interaction routes to CS without response',()=>{const x=coordinate(
 test('missing measurement is unknown not zero',()=>assert.equal(coordinate({...r,action:'ads.performance.read'},p,b).result,'UNKNOWN'));
 test('measurement read creates no effect',()=>assert.deepEqual(coordinate({...r,action:'ads.performance.read',measurement_complete:true},p,b),{result:'READ_ONLY',effect_executed:false}));
 test('methodology registry validates and keeps five phases',()=>{const schema=JSON.parse(readFileSync(new URL('../dev.woia/methodology.schema.json',import.meta.url)));const data=JSON.parse(readFileSync(new URL('../dev.woia/methodology.json',import.meta.url)));const validate=new Ajv().compile(schema);assert.equal(validate(data),true);assert.equal(data.phases.length,5);assert.equal(data.phases.at(-1),'improve-pause-escalate-close');assert.equal(validate({...data,phases:['execute']}),false)});
+
+test('revoked policy blocks',()=>assert.equal(coordinate(r,{...p,revoked:true},b).result,'BLOCKED'));
+test('stale policy blocks',()=>assert.equal(coordinate(r,{...p,current:false},b).result,'BLOCKED'));
