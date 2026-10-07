@@ -1,42 +1,9 @@
-# woia-ads
+# WOIA Ads v0.5.0
 
-Portable Agent Plugin for Generic Ads department orchestration with bounded paid-media authority..
+Generic department orchestrator implementing the accepted five-part Ads method, with WOIA Core >=0.5.3 hard dependency. Read [the skill](skills/woia-ads/SKILL.md), [methodology](skills/woia-ads/references/methodology.md) and [manifest](dev.woia/manifest.json).
 
-## Capability
+Ads coordinates paid work, qualified Ads Platforms effects, signal interpretation and bounded improvement. Person interactions route to Communications/Customer Service; no external dispatch or scheduling mutation occurs here. Finance keeps accounting authority. Approved context remains with its sources; no industry fork, duplicate master or universal backend.
 
-~~~text
-DISCOVER -> DECIDE -> IMPLEMENT -> VALIDATE -> REPORT
-~~~
+The pure eligibility helper does not execute platform effects, authenticate authority or enforce concurrent platform spend. Trusted Project bindings and policy must be host-verified. Live adapter qualification, Operator E2E and Production Ready are NOT_RUN/false.
 
-The plugin adapts to the repository it operates on without requiring the consumer to adopt WOIA's authoring toolchain.
-
-## Portable package
-
-~~~text
-plugin.json
-README.md
-CHANGELOG.md
-LICENSE
-skills/**
-# optional source diagnostic when retained by the repository
-CHECKSUMS.sha256
-~~~
-
-`CHECKSUMS.sha256` is optional source evidence, not a required portable/release artifact.
-
-Add `mcp.json` only if the capability genuinely requires MCP.
-
-## Consumer requirements
-
-Document only genuine capability/runtime requirements here. Do not list maintenance Node/pnpm/Mise/Docker unless the portable capability itself truly needs them.
-
-## Development
-
-~~~text
-mise install
-mise run bootstrap
-mise run doctor
-mise run ci:fast
-mise run ci:extended
-mise run release:check
-~~~
+Maintenance: mise run bootstrap, doctor, test, ci:fast, release:check; exact clean candidate certification from Ecosystem v0.5.4 with plugin:certify-thin. Tests are authoring-only and excluded from portable archive.
