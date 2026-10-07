@@ -26,3 +26,4 @@ test('methodology registry validates and keeps five phases',()=>{const schema=JS
 
 test('revoked policy blocks',()=>assert.equal(coordinate(r,{...p,revoked:true},b).result,'BLOCKED'));
 test('stale policy blocks',()=>assert.equal(coordinate(r,{...p,current:false},b).result,'BLOCKED'));
+for(const [file,good,bad] of [['paid-request.schema.json',r,{...r,payload_digest:'floating'}],['trusted-grant.schema.json',p,{...p,revoked:true}]])test('boundary schema '+file,()=>{const schema=JSON.parse(readFileSync(new URL('../dev.woia/'+file,import.meta.url)));const validate=new Ajv().compile(schema);assert.equal(validate(good),true);assert.equal(validate(bad),false)});
