@@ -1,1 +1,44 @@
-{"type":"object","additionalProperties":false,"required":["schema","phases","continuity_owner","external_person_owner","paid_effect_provider","industry_delta"],"properties":{"schema":{"const":"dev.woia.ads-methodology/v1"},"phases":{"type":"array","minItems":5,"maxItems":5,"uniqueItems":true,"items":{"enum":["objective-context-scope","plan-assets-measurement","authorized-effects","delivery-signals-results","improve-pause-escalate-close"]}},"continuity_owner":{"const":"woia-core"},"external_person_owner":{"const":"customer-service"},"paid_effect_provider":{"const":"woia-ads-platforms"},"industry_delta":{"const":false}}}
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "phases",
+    "continuity_owner",
+    "external_person_owner",
+    "paid_effect_provider",
+    "industry_delta"
+  ],
+  "properties": {
+    "schema": {
+      "const": "dev.woia.ads-methodology/v1"
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "objective-context-scope",
+          "plan-assets-measurement",
+          "authorized-effects",
+          "delivery-signals-results",
+          "improve-pause-escalate-close"
+        ]
+      }
+    },
+    "continuity_owner": {
+      "const": "woia-core"
+    },
+    "external_person_owner": {
+      "const": "customer-service"
+    },
+    "paid_effect_provider": {
+      "const": "woia-ads-platforms"
+    },
+    "industry_delta": {
+      "const": false
+    }
+  }
+}

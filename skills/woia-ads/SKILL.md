@@ -6,7 +6,7 @@ license: MIT
 
 # Ads orchestration
 
-Read [the methodology](references/methodology.md) and [the manifest](../../dev.woia/manifest.json). Select one generic Ads root per organization/Project. Require qualified immutable WOIA Core >=0.5.3 binding.
+Read [the methodology](references/methodology.md) and [the manifest](../../dev.woia/manifest.json). Select one generic Ads root per organization/Project. Require qualified immutable WOIA Core >=0.5.6 binding.
 
 1. Resolve accepted objective, context, account/resource/destination, timing, budget/currency and competent authority; do not invent missing values or underlying business terms.
 2. Prepare plan/assets/measurement through shared Strategy, Audience, Copy and Creative. Access suitable resources directly; request Marketing only for distinct missing outcomes. Ads owns paid variants/tests and conversion measurement, originating owners own business facts.
