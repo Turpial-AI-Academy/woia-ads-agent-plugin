@@ -1,6 +1,6 @@
-# WOIA Ads v0.5.6
+# WOIA Ads v0.5.7
 
-Generic department orchestrator implementing the accepted five-part Ads method, with WOIA Core >=0.5.6 hard dependency. Read [the skill](skills/woia-ads/SKILL.md), [methodology](skills/woia-ads/references/methodology.md) and [manifest](dev.woia/manifest.json).
+Generic department orchestrator implementing the accepted five-part Ads method, with WOIA Core >=0.5.7 hard dependency. Read [the skill](skills/woia-ads/SKILL.md), [methodology](skills/woia-ads/references/methodology.md) and [manifest](dev.woia/manifest.json).
 
 Ads coordinates paid work, qualified Ads Platforms effects, signal interpretation and bounded improvement. Person interactions route to Communications/Customer Service; no external dispatch or scheduling mutation occurs here. Finance keeps accounting authority. Approved context remains with its sources; no industry fork, duplicate master or universal backend.
 
